@@ -1,0 +1,11 @@
+scripts:
+  server:
+    python manage.py runserver
+  makemigration:
+    python manage.py makemigration
+  migrate:
+    python manage.py migrate
+  curl_auth: |
+    curl -X POST -H "Content-Type: application/json" -d "{\"username\":\"admin\",\"password\":\"pass\"}" http://127.0.0.1:8000/api/token/pair
+  curl_protect: |
+    curl -X GET -H "Authorization: Bearer <curl_access_token>" http://127.0.0.1:8000/api/me
