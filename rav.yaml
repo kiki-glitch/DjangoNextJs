@@ -1,10 +1,12 @@
 scripts:
   server:
     python manage.py runserver
-  makemigration:
-    python manage.py makemigration
+  makemigrations:
+    python manage.py makemigrations
   migrate:
     python manage.py migrate
+  shell:
+    python manage.py shell
   curl_auth: |
     curl -X POST -H "Content-Type: application/json" -d "{\"username\":\"admin\",\"password\":\"pass\"}" http://127.0.0.1:8000/api/token/pair
   curl_protect: |
