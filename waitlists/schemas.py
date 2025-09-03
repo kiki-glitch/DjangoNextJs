@@ -7,8 +7,18 @@ class WaitListEntryCreateSchema(Schema):
     #WaitlistEntryIn
     email: EmailStr
 
+class WaitlistEntryListSchema(Schema):
+    # List -> Data
+    # WaitlistEntryOut
+    id: int
+    email: EmailStr
+    # updated: datetime
+    # timestamp: datetime
+    # description: Optional[str] = ""
+
 class WaitListEntryDetailSchema(Schema):
     #Get -> Data
     #WaitlistEntryOut
-    email: str
-    timestamp: EmailStr
+    email: EmailStr
+    timestamp: datetime
+    updated: datetime
