@@ -12,15 +12,17 @@ from .schemas import WaitlistEntryListSchema, WaitListEntryDetailSchema, WaitLis
 router = Router()
 
 
-@router.get("", response=List[WaitlistEntryListSchema], auth=helpers.api_auth_user_required)
+@router.get("", response=List[WaitlistEntryListSchema],
+             auth=helpers.api_auth_user_required)
 def list_waitlist_entries(request):
-    qs = WaitlistEntry.objects.all()
+    qs = WaitlistEntry.objects.filter(user=request.user)
     return qs
 
 @router.post("", response=WaitListEntryDetailSchema, auth=helpers.api_auth_user_or_annon)
 def create_waitlist_entries(request, data:WaitListEntryCreateSchema):
     obj = WaitlistEntry(**data.dict())
-    print(request.user)
+    if request.user.is_authenticated:
+        obj.user = request.user
     obj.save()
     return obj
 
