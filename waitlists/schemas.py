@@ -1,11 +1,18 @@
 from datetime import datetime
 from ninja import Schema
 from pydantic import EmailStr
+from typing import List
 
-class WaitListEntryCreateSchema(Schema):
+class WaitlistEntryCreateSchema(Schema):
     #Create -> Data
     #WaitlistEntryIn
     email: EmailStr
+
+class ErrorWaitlistEntryCreateSchema(Schema):
+    #Create -> Data
+    #WaitlistEntryIn
+    email: List[dict]
+    # non_field_errors: List[str] = []
 
 class WaitlistEntryListSchema(Schema):
     # List -> Data
@@ -16,7 +23,7 @@ class WaitlistEntryListSchema(Schema):
     # timestamp: datetime
     # description: Optional[str] = ""
 
-class WaitListEntryDetailSchema(Schema):
+class WaitlistEntryDetailSchema(Schema):
     #Get -> Data
     #WaitlistEntryOut
     email: EmailStr
