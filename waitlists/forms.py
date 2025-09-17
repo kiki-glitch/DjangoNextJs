@@ -9,15 +9,15 @@ class WaitlistEntryCreateForm(forms.ModelForm):
 
     def clean_email(self):
         email = self.cleaned_data.get('email')
-        today = timezone.now()
+        today = timezone.now().day
         qs = WaitlistEntry.objects.filter(
-            email__iexact=email,
+            email=email,
             timestamp__day=today
         )
         if qs.count() > 5:
             raise forms.ValidationError("Cannot enter this email again today. Try again tomorrow.")
-        if email.endswith('@gmail.com'):
-            raise forms.ValidationError('Cannot use gmail')
+        # if email.endswith('@gmail.com'):
+        #     raise forms.ValidationError('Cannot use gmail')
         # if WaitlistEntry.objects.filter(email=email).exists():
         #     raise forms.ValidationError("This email is already on the waitlist")
         return email
